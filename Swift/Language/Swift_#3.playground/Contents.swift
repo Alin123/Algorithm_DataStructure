@@ -989,10 +989,37 @@ paragraph = nil
 
 
 
+class SupClass {
+    var name: String?
+    init(name: String?) {
+        self.name = name
+    }
+}
+class SonClass: SupClass {
+    override var name: String? {
+        get {
+            return nil
+        }
+        set {
+            super.name = newValue
+        }
+    }
+    var age: Int
+    override init(name: String?) {
+        self.age = 0
+        super.init(name: name)
+    }
+    init(name: String?, age: Int) {
+        self.age = age
+        super.init(name: nil)
+        self.name = name
+    }
+}
 
-
-
-
+var father = SupClass(name: "FFF")
+var son = SonClass(name: "SSS")
+son.name
+son.name = "son"
 
 
 

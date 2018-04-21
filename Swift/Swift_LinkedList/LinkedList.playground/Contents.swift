@@ -2,7 +2,7 @@ import UIKit
 
 class Node<Element> {
     var data: Element!
-    var prec: Node?
+    weak var prec: Node?
     var succ: Node?
     init() {}
     init(data: Element, prec: Node? = nil, succ: Node? = nil) {
@@ -62,6 +62,7 @@ class LinkList<Element: Equatable> {
         node.insertAsSucc(newElemnt)
         size += 1
     }
+    /// 在指定元素之前插入，若after不存在，那么newElement将插入到第一个位置上，表示不再任何Element之后
     func insert(_ newElement: Element, after: Element) {
         var node = tail
         while node.prec != nil {
@@ -71,6 +72,18 @@ class LinkList<Element: Equatable> {
             node = node.prec!
         }
         node.insertAsSucc(newElement)
+        size += 1
+    }
+    /// 在指定元素之前插入，若before不存在，那么newElement将插入到最后一个位置上，表示不再任何Element之前
+    func insert(_ newElement: Element, before: Element) {
+        var node = head.succ!
+        while node.succ != nil {
+            if node.data == before {
+                break
+            }
+            node = node.succ!
+        }
+        node.insertAsPrec(newElement)
         size += 1
     }
     func remove(_ element: Element) -> Element? {
@@ -107,6 +120,11 @@ class LinkList<Element: Equatable> {
         node.succ?.prec = node.prec
         size -= 1
         return ele
+    }
+    func removeAll() {
+        head.succ = tail
+        tail.prec = head
+        size = 0
     }
 }
 
@@ -150,29 +168,6 @@ class LinkListIterator<T: Equatable>: IteratorProtocol {
         return ele
     }
 }
-/*
-extension LinkList: Collection {
-    typealias Index = Int
-    var startIndex: Int {
-        return 0
-    }
-    var endIndex: Int {
-        return size - 1
-    }
-    subscript(position: Int) -> Element {
-        var currentNode = head.succ!
-        var index = position
-        while index > 0 {
-            currentNode = currentNode.succ!
-            index -= 1
-        }
-        return currentNode.data!
-    }
-    func index(after i: Int) -> Int {
-        return i + 1
-    }
-}
-*/
 
 
 var array = Array<Int>()
@@ -180,7 +175,6 @@ array.count
 array.isEmpty
 array.append(1)
 array.insert(0, at: 0)
-array
 
 let linkedList = LinkList<Int>()
 linkedList.append(3)
@@ -199,8 +193,9 @@ if let x = linkedList.remove(1000) {
 linkedList.insert(7, after: 3)
 linkedList.insert(0, at: 0)
 linkedList.insert(2, at: 1)
-linkedList.count
-
+linkedList
+linkedList.insert(24, before: 100)
+linkedList.insert(22, before: 24)
 for item in linkedList {
     print("\(item)")
 }
@@ -211,3 +206,4 @@ linkedList.map { (x) -> Int in
 linkedList.filter { (x) -> Bool in
     x >= 4
 }
+linkedList.removeAll()
