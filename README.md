@@ -506,22 +506,33 @@ void mergerSort(int array[], int start, int end, int newArray[]) {
 
 对于步骤1：取k=a[0]=7
 
-`i`<font color=white>`1``2``3``4``5``6``7``9`</font>`j`<br />
-<font color=red>`7`</font>`2``5``6``9``0``1``3``4``8`<br />
+`i`<font color=white>`1``2``3``4``5``6``7``9`</font>`j`<br>
+<font color=red>`7`</font>`2``5``6``9``0``1``3``4``8`
+
 从后往前，找到第一个小于k的数，进行交换（偶数次交换）<br>
-`i`<font color=white>`1``2``3``4``5``6``7`</font>`j`<font color=white>`9`</font><br />
-`4``2``5``6``9``0``1``3`<font color=red>`7`</font>`8`<br />
-从前往后，找到第一个大于k的数，进行交换（奇数次交换）<br>
-<font color=white>`0``1``2``3`</font>`i`<font color=white>`5``6``7`</font>`j`<font color=white>`9`</font><br />
-`4``2``5``6`<font color=red>`7`</font>`0``1``3``9``8`<br />
-然后再从后往前找，找到第一个小于k的数，进行交换<br />
-<font color=white>`0``1``2``3`</font>`i`<font color=white>`5``6`</font>`j`<font color=white>`8``9`</font><br />
-`4``2``5``6``3``0``1`<font color=red>`7`</font>`9``8`<br />
+
+`i`<font color=white>`1``2``3``4``5``6``7`</font>`j`<font color=white>`9`</font><br>
+`4``2``5``6``9``0``1``3`<font color=red>`7`</font>`8`
+
+从前往后，找到第一个大于k的数，进行交换（奇数次交换）
+
+<font color=white>`0``1``2``3`</font>`i`<font color=white>`5``6``7`</font>`j`<font color=white>`9`</font><br>
+`4``2``5``6`<font color=red>`7`</font>`0``1``3``9``8`
+
+然后再从后往前找，找到第一个小于k的数，进行交换
+
+<font color=white>`0``1``2``3`</font>`i`<font color=white>`5``6`</font>`j`<font color=white>`8``9`</font><br>
+`4``2``5``6``3``0``1`<font color=red>`7`</font>`9``8`
+
 然后再从前往后找，直到i==j时，停止寻找。
-<font color=white>`i``1``2``3``4``5``6`</font>`ij`<font color=white>`8``9`</font><br />
-`4``2``5``6``3``0``1`<font color=red> `7`</font>`9``8`<br />
-此时数字被分成3部分<br>
+
+<font color=white>`i``1``2``3``4``5``6`</font>`ij`<font color=white>`8``9`</font><br>
+`4``2``5``6``3``0``1`<font color=red> `7`</font>`9``8`
+
+此时数字被分成3部分
+
 `{4, 2, 5, 6, 3, 0, 1}``7``{9, 8}`<br>
+
 以分别对k=7所在的位置`i`(此时i==j)前面的部分[0, i-1]和后面部分[i+1, 9]进行排序就分别完成了步骤2、3
 
 ```
